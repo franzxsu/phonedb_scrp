@@ -6,7 +6,7 @@ import time
 
 TO_IGNORE_THESE_COLS = {"OEM ID", "asd"}
 # DATA_LIMIT = 60 #for the sake of testing
-DATA_LIMIT = 9999999999
+DATA_LIMIT = 23500
 
 def scrape_device_details(details_url):
     print(f'scraping: {details_url}')
@@ -80,7 +80,7 @@ def main():
             break
 
     devices_df = pd.DataFrame(devices_data)
-    devices_df.to_excel('real.xlsx', index=False)
+    devices_df.to_excel('vvvv.xlsx', index=False)
     print("DATA EXPORTED TO XLSX")
     elapsed_time = time.time() - start_time
     minutes, seconds = divmod(elapsed_time, 60)
