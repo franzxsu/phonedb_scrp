@@ -6,7 +6,7 @@ import time
 
 TO_IGNORE_THESE_COLS = {"OEM ID", "asd"}
 # DATA_LIMIT = 60 #for the sake of testing
-DATA_LIMIT = 200
+DATA_LIMIT = 9999999999
 
 def scrape_device_details(details_url):
     print(f'scraping: {details_url}')
@@ -58,10 +58,7 @@ def main():
         if links:
             print(f'found {len(links)} links, processing...')
 
-            # Collect all detail URLs
             detail_urls = ['https://phonedb.net/' + link['href'] for link in links]
-            
-            # Limit the number of URLs processed if we reach DATA_LIMIT
             detail_urls = detail_urls[:DATA_LIMIT - len(devices_data)]
             
             with ThreadPoolExecutor(max_workers=10) as executor:  # Adjust number of workers as needed
