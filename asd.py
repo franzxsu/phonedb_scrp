@@ -1,19 +1,22 @@
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
+import time
 
 TO_IGNORE_THESE_COLS={"OEM ID","asd"}
 # DATA_LIMIT = 60 #for the sake of testing
-DATA_LIMIT = 1000
+DATA_LIMIT = 200
 
 def main():
+    start_time = time.time()
     devices_data = []
     url = 'https://phonedb.net/index.php?m=device&s=list'
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
     print(f"MAIN TITLE: {soup.title.text}")
 
-    while len(devices_data) < 60:
+    while len(devices_data) < DATA_LIMIT:
+        print(f"data length: {len(devices_data)}")
         #get "see detailed datasheet for one device" element
         links = soup.find_all('a', {'title': 'See detailed datasheet'})
         if links:
@@ -69,8 +72,10 @@ def main():
             break
 
     devices_df = pd.DataFrame(devices_data)
-    devices_df.to_excel('data.xlsx', index=False)
+    devices_df.to_excel('ssss.xlsx', index=False)
     print("DATA EXPORTED TO XLSX")
-
+    elapsed_time = time.time() - start_time
+    minutes, seconds = divmod(elapsed_time, 60)
+    print(f"time elapsed: {int(minutes)} m {int(seconds)} s")
 if __name__ == "__main__":
     main()
