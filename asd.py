@@ -37,18 +37,17 @@ def main():
             for row in rows:
                 tds = row.find_all('td')
                 if len(tds) == 2:
-
                     # Get text inside the <strong> tag in the first <td>
                     first_td_strong = tds[0].find('strong')
                     if first_td_strong:
-                        first_td_text = first_td_strong.text
-                        print(f'First TD <strong> text: {first_td_text}\n')
+                        first_td_text = first_td_strong.text.strip()
                     
-                    # Get text inside the <a> tag in the second <td>
-                    second_td_a = tds[1].find('a')
-                    if second_td_a:
-                        second_td_text = second_td_a.text
-                        print(f'Second TD <a> text: {second_td_text}\n')
+                        # Get all the text in the second <td>
+                        second_td_text = tds[1].get_text(separator='', strip=True)
+                        
+                        # Print the final formatted output
+                        print(f'{first_td_text}: {second_td_text}')
+
         else:
             print('Table body not found.\n')
     else:
