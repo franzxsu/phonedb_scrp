@@ -2,8 +2,8 @@
 
 simple application that will scrape all device data in phonedb.net
 
-non multi thread = 6m9 s / 200 data (asd.py)
-multi thread = 2m20 / 200 data (sad.py)
+non multi thread = 6m9 s / 200 data (slow.py)
+multi thread = 2m20 / 200 data (app.py)
 
 required libraries: python-bs4 | beautifulsoup4
 
@@ -11,4 +11,4 @@ required libraries: python-bs4 | beautifulsoup4
 
 ```pip install bs4```
 
-```python sad.py```
+```python app.py```
